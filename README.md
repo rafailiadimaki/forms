@@ -8,3 +8,11 @@ Produce the following web pages by sketching their layout using HTML/CSS:
 6. Add / Edit Form for Students per Course
 7. Add / Edit Form for Assignments per Course
 8. Add / Edit Form for Assignments per Student per Course
+
+**Recommended devices:**
+   -  Desktop
+
+**Recommended browsers:**
+ -  Google Chrome
+ -  Microsoft Edge
+ -  Opera
