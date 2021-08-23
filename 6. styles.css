@@ -1,0 +1,64 @@
+body {
+    background-color: blanchedalmond;
+}
+
+h1 {
+    text-align: center;
+    color: darkgoldenrod;
+}
+
+p,
+small {
+    color: white;
+}
+
+#guidelines,
+label,
+pre {
+    font-weight: bold;
+    color: white;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.myDiv {
+    border: 20px outset gold;
+    background-color: lightskyblue;
+    text-align: left;
+}
+
+input[type="text"],
+[type="number"],
+[type="date"],
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px -5px;
+    border: 1px outset rgb(96, 143, 52);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100px;
+    background-color: lightgray;
+    color: black;
+    padding: 15px 32px;
+    margin: 8px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: "center";
+    position: relative;
+    right: -91%;
+}
+
+td,
+th {
+    background-color: lightskyblue;
+    background-size: cover;
+    border: 1px solid deepskyblue;
+    text-align: center;
+    padding: 100px;
+    width: 10%;
+    color: floralwhite;
+}

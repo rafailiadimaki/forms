@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale = "1.0">
+    <link rel="stylesheet" type="text/css" href="6. styles.css">
+    <link rel="shortcut icon" href="school.ico">
+    <title>Student Registration Form</title>
+</head>
+<body>  
+    <header>
+        <h1>Private School</h1>
+    </header>
+    <fieldset class="myDiv">
+        <p> Are you ready to add a new student? Fill out the form and then press submit.</p>
+        <form id="student_form" autocomplete="on">
+            <label for="sid">*Student Id: <small>(10000-10030)</small></label><br>
+            <input type="number" id="sid" name="sid" min="10000" max="10030" autocomplete="on" value="10015" required="required"onkeyup=enforceMinMax(this)><br>
+            <label for="fname">*First Name:</label><br>
+            <input type="text" id="fname" name="fname" maxlength = "15" autocomplete="on" value="Dahlia" required="required"><br>
+            <label for="lname">*Last Name:</label><br>
+            <input type="text" id="lname" name="lname" maxlength = "15" autocomplete="on" value="Martin" required="required"><br>
+            <label for="birthday">*Date of Birth:</label><br>
+            <input type="date" id="birthday" name="birthday" max="2003-12-31" required="required" value="2003-12-31"><br><br>
+            <label for="fees">*Tuition Fees:</label><br>
+            <input type="number" id="fees" name="fees" required="required" value=2000><br>
+            <label for="course">*Course:</label><br>
+            <select id="course" name="course" size="4" required="required">
+                <option value="Python" selected>Python</option>
+                <option value="C#">C#</option>
+                <option value="Java">Java</option>
+                <option value="Javascript">Javascript</option>
+            </select><br>
+        </form>
+        <input type="submit" placeholder="Submit" onclick="return IsEmpty();">
+        <pre>*   It indicates a required field.</pre>
+        <p id = "guidelines">** When you submit the form, your input data will be displayed below. Please feel free to edit them, if you notice any mistakes or omissions.</p>
+    </fieldset>
+    <table id="StudentTable" contenteditable="true">
+    </table>
+
+    <script>
+    function IsEmpty() {
+    if (document.forms['student_form'].sid.value === "" || document.forms['student_form'].fname.value === "" ||document.forms['student_form'].lname.value === "" ||document.forms['student_form'].birthday.value === "" ||document.forms['student_form'].fees.value === "") {
+    alert("All required fields must be filled in.");
+    return false;
+    }
+    Student_Function();
+    return true;}
+    function Student_Function() {
+        var table = document.getElementById("StudentTable");
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var x = document.getElementById("student_form");
+        var text = "";
+        var i;
+        for (i = 0; i < x.length ; i++) {
+        text += x.elements[i].value + "<br>";
+        }
+        cell1.innerHTML = text;
+        var y = document.getElementById("StudentTable");
+        y.contentEditable = "true";        
+    }
+    function enforceMinMax(el){
+    if(el.value != ""){
+        if(parseInt(el.value) < parseInt(el.min)){
+        el.value = el.min;
+        alert('The student id must be greater than 10000. Please use the arrows to increase and decrease the value.');
+    }
+        if(parseInt(el.value) > parseInt(el.max)){
+        el.value = el.max;
+        alert('The student id must be less than 10030. Please use the arrows to increase and decrease the value.');}
+        }
+    }
+    </script>
+
+</body>
+</html>

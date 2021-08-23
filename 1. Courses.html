@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale = "1.0">
+    <link rel="stylesheet" type="text/css" href="1. styles.css">
+    <link rel="shortcut icon" href="school.ico">
+    <title>Course Information Form</title>
+</head>
+<body>  
+    <header>
+        <h1>Private School</h1>
+    </header>
+    <fieldset class="myDiv">
+        <p> Are you ready to add a new course? Fill out the form and then press submit.</p>
+        <form id="course_form" autocomplete="on">
+            <label for="cid">*Course Id: <small>(100-150)</small></label><br>
+            <input type="number" id="cid" name="cid" min="100" max="150" required="required" autocomplete="on" value="125" required="required"onkeyup=enforceMinMax(this)><br>
+            <label for="title">*Course Title:</label><br>
+            <select id="title" onchange="Autofill()">
+                <option value=""></option>
+                <option value="CB13FTPY">CB13FTPY</option>
+                <option value="CB13PTPY">CB13PTPY</option>
+                <option value="CB13FTC#">CB13FTC#</option>
+                <option value="CB13PTC#">CB13PTC#</option>
+                <option value="CB13FTJV">CB13FTJV</option>
+                <option value="CB13PTJV">CB13PTJV</option>
+                <option value="CB13FTJS">CB13FTJS</option>
+                <option value="CB13PTJS">CB13PTJS</option>
+            </select><br>
+            <label for="language">Course Language:</label><br>
+            <select id="language" disabled>
+                <option value =""></option>
+                <option value="Python">Python</option>
+                <option value="C#">C#</option>
+                <option value="Java">Java</option>
+                <option value="Javascript">Javascript</option>
+            </select><br>
+            <label for="description">Course Description:</label><br>
+            <select id="description" disabled>
+                <option value =""></option>
+                <option value="Python 12 WEEKS">Python 12 WEEKS</option>
+                <option value="Python 24 WEEKS">Python 24 WEEKS</option>
+                <option value="C# 12 WEEKS">C# 12 WEEKS</option>
+                <option value="C# 24 WEEKS">C# 24 WEEKS"</option>
+                <option value="Java 12 WEEKS">Java 12 WEEKS</option>
+                <option value="Java 24 WEEKS">Java 24 WEEKS"</option>
+                <option value="Javascript 12 WEEKS">Javascript 12 WEEKS</option>
+                <option value="Javascript 24 WEEKS">Javascript 24 WEEKS"</option>
+            </select><br>
+            <label for="ctype">Course Type:</label><br>
+            <select id="ctype" disabled>
+                <option value =""></option>
+                <option value="Full Time">Full Time</option>
+                <option value="Part Time">Part Time</option>
+            </select>
+        </form>
+        <input type="submit" value="Submit" onclick="return IsEmpty();">
+        <pre>*   It indicates a required field.</pre>
+        <p id = "guidelines">** When you submit the form, your input data will be displayed below. Please feel free to edit them, if you notice any mistakes or omissions.</p>
+        </fieldset>
+        <table id="CourseTable" contenteditable="true">
+        </table>
+              
+<script>
+    function Autofill() {
+        if (document.getElementById("title").value == "CB13FTPY") {
+        document.getElementById("language").value = "Python";
+        document.getElementById("description").value = "Python 12 WEEKS";
+        document.getElementById("ctype").value = "Full Time";    
+        }
+        if (document.getElementById("title").value == "CB13PTPY") {
+            document.getElementById("language").value = "Python";
+            document.getElementById("description").value = "Python 24 WEEKS";
+            document.getElementById("ctype").value = "Part Time";    
+            }
+        if (document.getElementById("title").value == "CB13FTC#") {
+            document.getElementById("language").value = "C#";
+            document.getElementById("description").value = "C# 12 WEEKS";
+            document.getElementById("ctype").value = "Full Time";    
+            }
+        if (document.getElementById("title").value == "CB13PTC#") {
+            document.getElementById("language").value = "C#";
+            document.getElementById("description").value = "C# 24 WEEKS";
+            document.getElementById("ctype").value = "Part Time";    
+            }
+        if (document.getElementById("title").value == "CB13FTJV") {
+            document.getElementById("language").value = "Java";
+            document.getElementById("description").value = "Java 12 WEEKS";
+            document.getElementById("ctype").value = "Full Time";    
+            }
+        if (document.getElementById("title").value == "CB13PTJV") {
+            document.getElementById("language").value = "Java";
+            document.getElementById("description").value = "Java 24 WEEKS";
+            document.getElementById("ctype").value = "Part Time";    
+            }
+        if (document.getElementById("title").value == "CB13FTJS") {
+            document.getElementById("language").value = "Javascript";
+            document.getElementById("description").value = "Javascript 12 WEEKS";
+            document.getElementById("ctype").value = "Full Time";    
+            }
+        if (document.getElementById("title").value == "CB13PTJS") {
+            document.getElementById("language").value = "Javascript";
+            document.getElementById("description").value = "Javascript 24 WEEKS";
+            document.getElementById("ctype").value = "Part Time";    
+            }
+
+    }
+    function IsEmpty() {
+    if (document.forms['course_form'].cid.value === "" || document.forms['course_form'].title.value === "") {
+    alert("All required fields must be filled in.");
+    return false;
+    }
+    Course_Function();
+    return true;}
+    function Course_Function() {
+        var table = document.getElementById("CourseTable");
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var x = document.getElementById("course_form");
+        var text = "";
+        var i;
+        var checked = document.querySelectorAll('#subject :checked');
+        var selected = [...checked].map(option => option.value);
+        for (i = 0; i < x.length ; i++) {
+        text += x.elements[i].value + "<br>";
+        }
+        {
+            text += selected;
+        }
+        cell1.innerHTML = text;
+        var y = document.getElementById("CourseTable");
+        y.contentEditable = "true";        
+    }
+    function enforceMinMax(el){
+    if(el.value != ""){
+        if(parseInt(el.value) < parseInt(el.min)){
+        el.value = el.min;
+        alert('The course id must be greater than 100. Please use the arrows to increase and decrease the value.');
+    }
+        if(parseInt(el.value) > parseInt(el.max)){
+        el.value = el.max;
+        alert('The course id must be less than 150. Please use the arrows to increase and decrease the value.');}
+        }
+    }
+</script>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale = "1.0">
+    <link rel="stylesheet" type="text/css" href="8. styles.css">
+    <link rel="shortcut icon" href="school.ico">
+    <title>Instructor Course Assignment Form</title>
+</head>
+<body>  
+    <header>
+        <h1>Private School</h1>
+    </header>
+    <fieldset class="myDiv">
+        <p> Are you ready to add a new assignment? Fill out the form and then press submit.</p>
+        <form id="assignment_form" autocomplete="on">
+            <label for="aid">*Assignment Id:<small>(3200-3230)</small></label><br>
+            <input type="number" id="aid" name="aid" min="3200" max="3230" autocomplete="on" required="required" value="3215" onkeyup=enforceMinMax(this)><br>
+            <label for="title">*Title:</label><br>
+            <input type="text" id="title" name="title" minlength = "10" maxlength = "40" autocomplete="on" required="required" value="An Introduction to Python Programming Language"><br>
+            <label for="descr">*Description:</label><br>
+            <input type="text" id="descr" name="descr" minlength = "20" maxlength = "90" autocomplete="on" required="required" value="Provide a detailed explanation of the usefulness of Python"><br>
+            <label for="asdate">*Date of Submission:</label><br>
+            <input type="date" id="asdate" name="asdate"  min="2021-07-09" required="required" value="2021-07-15"><br>
+            <label for="scmark">*Mark for the submitted code:</label><br>
+            <input type="number" id="scmark" name="scmark" min="1" max="100" required="required" value="100" onkeyup=GradeMinMax(this)><br>
+            <label for="omark">*Mark for the oral code:</label><br>
+            <input type="number" id="omark" name="omark" min="1" max="100" required="required" value="81" onkeyup=GradeMinMax(this)><br>
+            <label for="course">*Course:</label><br>
+            <select id="course" name="course" size="4" multiple required="required"> 
+                <option value="Python" selected>Python</option>
+                <option value="C#">C#</option>
+                <option value="Java">Java</option>
+                <option value="Javascript">Javascript</option>
+            </select><br>
+            <label for="student">Student(s):</label><br>
+        </form>
+        <select id="student" name="student" size="8" multiple>
+            <option value=" Dimitris Smith">1023456789 Dimitris Smith</option>
+            <option value=" Anna Williams">0987651252 Anna Williams</option>
+            <option value=" Sakis Brown">5241298778 Sakis Brown</option>
+            <option value=" Marina Jackson">8583828186 Marina Jackson</option>
+            <option value=" James Bond">4746872110 James Bond</option>
+            <option value=" Elisabeth King">0100200300 Elisabeth King</option>
+            <option value=" Benjamin Miller">9796858987 Benjamin Miller</option>
+            <option value=" Lisa Davis">7418529630 Lisa Davis</option>
+        </select><br>
+        <input type="submit" placeholder="Submit" onclick="return IsEmpty();">
+        <pre>*   It indicates a required field.</pre>
+        <p id = "guidelines">** When you submit the form, your input data will be displayed below. Please feel free to edit them, if you notice any mistakes or omissions.</p>
+    </fieldset>
+    <table id="AssignmentTable" contenteditable="true">
+    </table>
+
+    <script>
+    function IsEmpty() {
+    if (document.forms['assignment_form'].aid.value === "" || document.forms['assignment_form'].title.value === "" ||document.forms['assignment_form'].descr.value === "" ||document.forms['assignment_form'].asdate.value === "" ||document.forms['assignment_form'].scmark.value === "" ||document.forms['assignment_form'].omark.value === "") {
+    alert("All required fields must be filled in.");
+    return false;
+    }
+    Assignment_Function();
+    return true;}
+    function Assignment_Function() {
+        var table = document.getElementById("AssignmentTable");
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var x = document.getElementById("assignment_form");
+        var text = "";
+        var i;
+        var checked = document.querySelectorAll('#student :checked');
+        var selected = [...checked].map(option => option.value);
+        for (i = 0; i < x.length ; i++) {
+        text += x.elements[i].value + "<br>";
+        }
+        {
+            text += selected;
+        }
+        cell1.innerHTML = text;
+        var y = document.getElementById("AssignmentTable");
+        y.contentEditable = "true";        
+    }
+    function enforceMinMax(el){
+    if(el.value != ""){
+        if(parseInt(el.value) < parseInt(el.min)){
+        el.value = el.min;
+        alert('The assignment id must be greater than 3200. Please use the arrows to increase and decrease the value.');
+    }
+        if(parseInt(el.value) > parseInt(el.max)){
+        el.value = el.max;
+        alert('The assignment id must be less than 3230. Please use the arrows to increase and decrease the value.');}
+        }
+    }
+    function GradeMinMax(el){
+        if(el.value != ""){
+            if(parseInt(el.value) < parseInt(el.min)){
+            el.value = el.min;
+            alert('The mark must be greater than 1. Please use the arrows to increase and decrease the value.');
+        }
+            if(parseInt(el.value) > parseInt(el.max)){
+            el.value = el.max;
+            alert('The mark must be less than 100. Please use the arrows to increase and decrease the value.');}
+            }
+    }
+    </script>
+
+</body>
+</html>

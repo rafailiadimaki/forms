@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale = "1.0">
+    <link rel="stylesheet" type="text/css" href="5. styles.css">
+    <link rel="shortcut icon" href="school.ico">
+    <title>Application Form for Trainers</title>
+</head>
+<body>  
+    <header>
+        <h1>Private School</h1>
+    </header>
+    <fieldset class="myDiv">
+        <p> Are you ready to add a new trainer? Fill out the form and then press submit.</p>
+        <form id="trainer_form" autocomplete="on">
+            <label for="tid">*Trainer Id: <small>(1000-1010)</small></label><br>
+            <input type="number" id="tid" name="tid" min="1000" max="1020" autocomplete="on" value="1000" required="required"onkeyup=enforceMinMax(this)><br>
+            <label for="fname">*First Name:</label><br>
+            <input type="text" id="fname" name="fname" maxlength = "15" autocomplete="on" value="Bon" required="required"><br>
+            <label for="lname">*Last Name:</label><br>
+            <input type="text" id="lname" name="lname" maxlength = "15" autocomplete="on" value="Adkins" required="required"><br>
+            <label for="course">*Course:</label><br>
+            <select id="course" name="course" size="4" required="required">
+                <option value="Python" selected>Python</option>
+                <option value="C#">C#</option>
+                <option value="Java">Java</option>
+                <option value="JavaScript">JavaScript</option>
+            </select><br>
+        </form>
+            <label for="subject">Subject:</label><br>
+            <select name="subject" id="subject" size = "9" multiple>
+                <option value=" Software Design and Development" selected>Software Design and Development</option>
+                <option value=" Introduction to Programming">Introduction to Programming</option>
+                <option value=" Object Oriented Programming">Object Oriented Programming</option>
+                <option value=" Web Design and Development Fundamentals (Front End)">Web Design and Development Fundamentals (Front End)</option>
+                <option value=" (Relational) Databases" selected>(Relational) Databases</option>
+                <option value=" Web Application Development, MVC and other Frameworks">Web Application Development, MVC and other Frameworks</option>
+                <option value=" Software Testing And Debugging"> Software Testing And Debugging</option>
+                <option value=" UI/UX - Usability" selected>UI/UX - Usability</option>
+                <option value=" Developer soft skills and teamwork">Developer soft skills and teamwork</option>
+            </select>
+        <input type="submit" value="Submit" onclick="return IsEmpty();">
+        <pre>*   It indicates a required field.</pre>
+        <p id = "guidelines">** When you submit the form, your input data will be displayed below. Please feel free to edit them, if you notice any mistakes or omissions.</p>
+    </fieldset>
+    <table id="TrainerTable" contenteditable="true">
+    </table>
+
+    <script>
+    function IsEmpty() {
+    if (document.forms['trainer_form'].tid.value === "" || document.forms['trainer_form'].fname.value === "" ||document.forms['trainer_form'].lname.value === "" || document.forms['trainer_form'].course.value === "") {
+    alert("All required fields must be filled in.");
+    return false;
+    }
+    Trainer_Function();
+    return true;}
+    function Trainer_Function() {
+        var table = document.getElementById("TrainerTable");
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var x = document.getElementById("trainer_form");
+        var text = "";
+        var i;
+        var checked = document.querySelectorAll('#subject :checked');
+        var selected = [...checked].map(option => option.value);
+        for (i = 0; i < x.length ; i++) {
+        text += x.elements[i].value + "<br>";
+        }
+        {
+            text += selected;
+        }
+        cell1.innerHTML = text;
+        var y = document.getElementById("TrainerTable");
+        y.contentEditable = "true";        
+    }
+    function enforceMinMax(el){
+    if(el.value != ""){
+        if(parseInt(el.value) < parseInt(el.min)){
+        el.value = el.min;
+        alert('The trainer id must be greater than 1000. Please use the arrows to increase and decrease the value.');
+    }
+        if(parseInt(el.value) > parseInt(el.max)){
+        el.value = el.max;
+        alert('The trainer id must be less than 1020. Please use the arrows to increase and decrease the value.');}
+        }
+    }
+    </script>
+
+</body>
+</html>
