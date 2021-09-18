@@ -1,4 +1,6 @@
 # forms
+[![DOI](https://zenodo.org/badge/399067629.svg)](https://zenodo.org/badge/latestdoi/399067629)
+
 Produce the following web pages by sketching their layout using HTML/CSS:
 1. Add / Edit Form for Courses
 2. Add / Edit Form for Trainers
